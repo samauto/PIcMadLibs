@@ -50,6 +50,7 @@
 		0491826A1CEE1BBD0075A137 /* FlickrAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049182691CEE1BBD0075A137 /* FlickrAPI.swift */; };
 		0491826E1CEE1BF30075A137 /* FlickrConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491826D1CEE1BF30075A137 /* FlickrConstant.swift */; };
 		049182701CEE1C180075A137 /* FlickrConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491826F1CEE1C180075A137 /* FlickrConvenience.swift */; };
+		04CBEF5D1D4CDAF500E1A7CF /* wordKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBEF5C1D4CDAF500E1A7CF /* wordKeyboard.swift */; };
 		04FAC7241CEE409B0080CC2B /* PML_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC7231CEE409B0080CC2B /* PML_TableViewController.swift */; };
 		04FAC7261CEE43240080CC2B /* MadLibsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAC7251CEE43240080CC2B /* MadLibsTableCell.swift */; };
 /* End PBXBuildFile section */
@@ -121,6 +122,7 @@
 		049182691CEE1BBD0075A137 /* FlickrAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrAPI.swift; sourceTree = "<group>"; };
 		0491826D1CEE1BF30075A137 /* FlickrConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrConstant.swift; sourceTree = "<group>"; };
 		0491826F1CEE1C180075A137 /* FlickrConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrConvenience.swift; sourceTree = "<group>"; };
+		04CBEF5C1D4CDAF500E1A7CF /* wordKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wordKeyboard.swift; sourceTree = "<group>"; };
 		04FAC7231CEE409B0080CC2B /* PML_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PML_TableViewController.swift; sourceTree = "<group>"; };
 		04FAC7251CEE43240080CC2B /* MadLibsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MadLibsTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -208,6 +210,7 @@
 		047AACF81D43CB6D004E35DA /* WORD_Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				04CBEF5C1D4CDAF500E1A7CF /* wordKeyboard.swift */,
 				047AACF91D43CB86004E35DA /* wordInfo.swift */,
 				047AACFB1D43D1FD004E35DA /* wordConstant.swift */,
 				042E02B71D43D8EC006C3A0E /* wordRandom.swift */,
@@ -467,6 +470,7 @@
 				044ABD161D4A6FB100E0A738 /* MadLibsResultsCell.swift in Sources */,
 				049182261CECE2AF0075A137 /* PML_FormController.swift in Sources */,
 				044ABD121D4A3E8900E0A738 /* VerbPhoto+CoreDataProperties.swift in Sources */,
+				04CBEF5D1D4CDAF500E1A7CF /* wordKeyboard.swift in Sources */,
 				047AACE81D43B80F004E35DA /* Alert.swift in Sources */,
 				0491825F1CED09750075A137 /* AdverbPhoto.swift in Sources */,
 				049182241CECE2AF0075A137 /* AppDelegate.swift in Sources */,

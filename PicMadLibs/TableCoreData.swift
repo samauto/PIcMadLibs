@@ -29,6 +29,14 @@ func loadMadLibs() -> [MadLib]? {
     var savedMadLibs = [MadLib]()
     do {
         savedMadLibs = try sharedContext.executeFetchRequest(fetchRequest) as! [MadLib]
+        if (savedMadLibs.count > 0) {
+            for smadlibs in savedMadLibs {
+                if (smadlibs.nounphoto.wordName == nil) {
+                    sharedContext.deleteObject(smadlibs)
+                    CoreDataStackManager.sharedInstance().saveContext()
+                }
+        }
+        }
     } catch {
         popAlert("ERROR",errorString: "Problem with retrieving PicMadLibs from Core Data!")
     }

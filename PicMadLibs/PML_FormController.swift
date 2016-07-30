@@ -60,6 +60,10 @@ class PML_FormController: UIViewController, UITextFieldDelegate, UINavigationCon
     // MARK: VIEW
     override func viewDidLoad() {
         super.viewDidLoad()
+        //check for Internet Connection
+        if Reachability.isConnectedToNetwork() == true {
+            print("internet connection OK")
+        }
         
         formMessage.text = "to create your PicMadLib. You have two options for Pics you can let us find a pic or click on the Camera icon to use your own pic"
         formMessage.hidden = false
@@ -74,23 +78,60 @@ class PML_FormController: UIViewController, UITextFieldDelegate, UINavigationCon
             generatePicMadLib.setTitle("UPDATE", forState: UIControlState.Normal)
         }
         
+        self.nounInput.delegate = self
+        self.verbInput.delegate = self
+        self.adverbInput.delegate = self
+        self.adjectiveInput.delegate = self
+        
     }
     //END OF FUNC: viewDidLoad
 
+    override func viewDidAppear(animated: Bool) {
+        if Reachability.isConnectedToNetwork() == false {
+            print("Internet connection FAILED")
+            findAPIAlert("NO INTERNET CONNECTION", errorString: "please try again creating a PicMadLib when the Internet is working")
+        }
+    }
+    
+    //END OF FUNC viewDidLoad
+    
+    
+    // Function to view WILL APPEAR
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        subscribeToKeyboardNotifications()
+        subscribeToKeyboardwillhideNotifications()
+    }
+    
+    
+    // Function to view WILL DISAPPEAR
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeFromKeyboardNotifications()
+        unsubscribeFromKeyboardwillhideNotifications()
+    }
+
+    
     
     //MARK; BUTTONS
     
     @IBAction func cancelPressed(sender: AnyObject) {
+      goBack()
+    }
+    //END OF FUNC cancelPressed
+    
+    func goBack()
+    {
         let isPresentingInAddMadLibMode = presentingViewController is UINavigationController
-
+        
         if isPresentingInAddMadLibMode {
             dismissViewControllerAnimated(true, completion: nil)
         } else {
             navigationController!.popViewControllerAnimated(true)
         }
-        
     }
-    //END OF FUNC cancelPressed
+    //END OF FUNC goBack()
+    
     
     
     @IBAction func generatePressed(sender: AnyObject) {
@@ -102,18 +143,24 @@ class PML_FormController: UIViewController, UITextFieldDelegate, UINavigationCon
                 madList?.verbs = self.verbInput.text!
                 
             } else {
-            let randID = Int(arc4random_uniform(1000000) + 1)
-            let tempID = "PicMadLib_"+String(randID)
+                if Reachability.isConnectedToNetwork() == false {
+                    print("Internet connection FAILED")
+                    internetAlert("NO INTERNET CONNECTION", errorString: "please try again creating a PicMadLib when the Internet is working")
+                }
+                else {
+                    let randID = Int(arc4random_uniform(1000000) + 1)
+                    let tempID = "PicMadLib_"+String(randID)
             
-            // If fields are blank and Generate button is pressed the field will be filled with a random Word
-            randWordGenButt()
+                    // If fields are blank and Generate button is pressed the field will be filled with a random Word
+                    randWordGenButt()
 
-            //Add the new or updated MadLib to the List
-            performOnMain {
-                self.madList = MadLib(madID: tempID, noun: self.nounInput.text!, verb: self.verbInput.text!, adverb: self.adverbInput.text!, adjective: self.adjectiveInput.text!, context: self.sharedContext)
+                    //Add the new or updated MadLib to the List
+                    performOnMain {
+                        self.madList = MadLib(madID: tempID, noun: self.nounInput.text!, verb: self.verbInput.text!, adverb: self.adverbInput.text!, adjective: self.adjectiveInput.text!, context: self.sharedContext)
             
-                self.findPhotos(self.madList!, noun: self.nounInput.text!,  verb: self.verbInput.text!,  adverb: self.adverbInput.text!,  adjective: self.adjectiveInput.text!)
-                CoreDataStackManager.sharedInstance().saveContext()
+                        self.findPhotos(self.madList!, noun: self.nounInput.text!,  verb: self.verbInput.text!,  adverb: self.adverbInput.text!,  adjective: self.adjectiveInput.text!)
+                        CoreDataStackManager.sharedInstance().saveContext()
+                    }
                 }
             }
         }

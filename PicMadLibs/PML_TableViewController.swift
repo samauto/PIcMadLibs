@@ -73,6 +73,7 @@ class PML_TableViewController: UITableViewController,NSFetchedResultsControllerD
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
+
     }//END OF FUNC: viewWillAppear
 
     // MARK: Navigation

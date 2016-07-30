@@ -60,11 +60,11 @@ extension PML_FormController{
             wordArray = WordConstants.AdjectiveInfo.wordExamples
         }
     
-    let wordCnt = wordArray.count
-    let wrdRand = Int(arc4random_uniform(UInt32(wordCnt)))
-    randword = wordArray[wrdRand]
+        let wordCnt = wordArray.count
+        let wrdRand = Int(arc4random_uniform(UInt32(wordCnt)))
+        randword = wordArray[wrdRand]
     
-    return randword
+        return randword
     
     }
     //END OF FUNC: randomWord

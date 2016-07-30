@@ -35,6 +35,10 @@ class PML_ResultsController: UITableViewController,NSFetchedResultsControllerDel
     // MARK: VIEW
     override func viewDidLoad() {
         super.viewDidLoad()
+        //check for Internet Connection
+        if Reachability.isConnectedToNetwork() == true {
+            print("internet connection OK")
+        }
         
         if (internetYESNO == "NO") {
             editButton.enabled = false
@@ -52,7 +56,15 @@ class PML_ResultsController: UITableViewController,NSFetchedResultsControllerDel
     }
     //END OF FUNC viewDidLoad
     
+    override func viewDidAppear(animated: Bool) {
+        if Reachability.isConnectedToNetwork() == false {
+            print("Internet connection FAILED")
+            internetAlert("NO INTERNET CONNECTION", errorString: "please try again when the Internet is working")
+        }
+    }
     
+    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         madLists = [selMadList]
@@ -67,8 +79,17 @@ class PML_ResultsController: UITableViewController,NSFetchedResultsControllerDel
     //END OF FUNC: viewWillAppear
     
     
-    @IBAction func refreshPressed(sender: AnyObject) {
-        self.tableView.reloadData()
+    func returnMainMenu() {
+        let isPresentingInAddMadLibMode = presentingViewController is UINavigationController
+        if isPresentingInAddMadLibMode {
+            dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            navigationController!.popViewControllerAnimated(true)
+        }
+    }
+    
+    func internetEnded() {
+        returnMainMenu()
     }
     
     func refreshAuto(){
@@ -99,6 +120,16 @@ class PML_ResultsController: UITableViewController,NSFetchedResultsControllerDel
         }
     }
     //END OF FUNC cancelPressed
+    
+    //FUNC: internetAlert(): Display an Alrt Box
+    func internetAlert(typeOfAlert: String, errorString: String) {
+        let internetController = UIAlertController(title: typeOfAlert, message: errorString, preferredStyle: UIAlertControllerStyle.Alert)
+        internetController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: {action in self.internetEnded()}))
+        if (self.presentedViewController == nil)
+        {self.presentViewController(internetController, animated: true, completion: nil)}
+    }
+    //END OF FUNC: internetAlert()
+
     
 }
 //END OF CLASS: PML_ResultsController

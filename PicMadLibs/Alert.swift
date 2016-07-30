@@ -11,7 +11,7 @@ import UIKit
 
 extension PML_FormController{
     
-    //FUNC: popAlert(): Display an Alrt Box
+    //FUNC: findAPIAlert(): Display an Alrt Box
     func findAPIAlert(typeOfAlert: String, errorString: String) {
         
         let findAPIController = UIAlertController(title: typeOfAlert, message: errorString, preferredStyle: UIAlertControllerStyle.Alert)
@@ -21,6 +21,15 @@ extension PML_FormController{
         if (self.presentedViewController == nil)
             {self.presentViewController(findAPIController, animated: true, completion: nil)}
     }
-    //END OF FUNC: popAlert()
+    //END OF FUNC: findAPIAlert()
+ 
     
+    //FUNC: internetAlert(): Display an Alrt Box
+    func internetAlert(typeOfAlert: String, errorString: String) {
+        let internetController = UIAlertController(title: typeOfAlert, message: errorString, preferredStyle: UIAlertControllerStyle.Alert)
+        internetController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: {action in self.goBack()}))
+        if (self.presentedViewController == nil)
+        {self.presentViewController(internetController, animated: true, completion: nil)}
+    }
+    //END OF FUNC: internetAlert()
 }

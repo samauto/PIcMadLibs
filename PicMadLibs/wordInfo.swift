@@ -32,7 +32,7 @@ extension PML_FormController{
     // END OF ADVERB HELP
     
     @IBAction func AdjectiveHelp(sender: AnyObject) {
-        wordHelp("adverb")
+        wordHelp("adjective")
     }
     // END OF ADJECTIVE HELP
     
@@ -44,27 +44,27 @@ extension PML_FormController{
         var exWord: String = ""
         var wordMessage: String = ""
         
-        if (type == "noun") {
-            wordTitle = WordConstants.NounInfo.Title
-            whatisWord = WordConstants.NounInfo.WhatIs
-            exWord = WordConstants.NounInfo.Example
-        
-        } else if (type == "verb") {
-            wordTitle = WordConstants.VerbInfo.Title
-            whatisWord = WordConstants.VerbInfo.WhatIs
-            exWord = WordConstants.VerbInfo.Example
-
-        } else if (type == "adverb") {
-            wordTitle = WordConstants.AdverbInfo.Title
-            whatisWord = WordConstants.AdverbInfo.WhatIs
-            exWord = WordConstants.AdverbInfo.Example
-            
-        } else {
-            wordTitle = WordConstants.AdjectiveInfo.Title
-            whatisWord = WordConstants.AdjectiveInfo.WhatIs
-            exWord = WordConstants.AdjectiveInfo.Example
-            
+        switch(type) {
+            case "noun":
+                wordTitle = WordConstants.NounInfo.Title
+                whatisWord = WordConstants.NounInfo.WhatIs
+                exWord = WordConstants.NounInfo.Example
+            case "verb":
+                wordTitle = WordConstants.VerbInfo.Title
+                whatisWord = WordConstants.VerbInfo.WhatIs
+                exWord = WordConstants.VerbInfo.Example
+            case "adverb":
+                wordTitle = WordConstants.AdverbInfo.Title
+                whatisWord = WordConstants.AdverbInfo.WhatIs
+                exWord = WordConstants.AdverbInfo.Example
+            case "adjective":
+                wordTitle = WordConstants.AdjectiveInfo.Title
+                whatisWord = WordConstants.AdjectiveInfo.WhatIs
+                exWord = WordConstants.AdjectiveInfo.Example
+            default:
+                break
         }
+        
         wordMessage = whatisWord+exWord
         wordAlert(wordTitle, message: wordMessage)
     

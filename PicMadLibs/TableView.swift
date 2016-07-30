@@ -15,7 +15,6 @@ extension PML_TableViewController
     // MARK: TableView Datasource
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         // Return the number of sections
         return 1
         
@@ -26,10 +25,10 @@ extension PML_TableViewController
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (madLists.count > 0) {
             noPicMadLibsLabel.hidden = true
-            self.navigationItem.leftBarButtonItem = self.editButtonItem()
+            navigationItem.leftBarButtonItem = editButtonItem()
         }
         else {
-            self.navigationItem.leftBarButtonItem = nil
+            navigationItem.leftBarButtonItem = nil
         }
         
         // Return the number of rows
