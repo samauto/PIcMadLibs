@@ -38,11 +38,9 @@ class PML_ResultsController: UITableViewController,NSFetchedResultsControllerDel
         //check for Internet Connection
         if Reachability.isConnectedToNetwork() == true {
             print("internet connection OK")
+            editButton.enabled = true
         }
         
-        if (internetYESNO == "NO") {
-            editButton.enabled = false
-        }
         
         if (newOrupdate == "New") {
             cancelButton.title = "HOME"
@@ -59,6 +57,7 @@ class PML_ResultsController: UITableViewController,NSFetchedResultsControllerDel
     override func viewDidAppear(animated: Bool) {
         if Reachability.isConnectedToNetwork() == false {
             print("Internet connection FAILED")
+            editButton.enabled = false
             internetAlert("NO INTERNET CONNECTION", errorString: "please try again when the Internet is working")
         }
     }
@@ -89,7 +88,7 @@ class PML_ResultsController: UITableViewController,NSFetchedResultsControllerDel
     }
     
     func internetEnded() {
-        returnMainMenu()
+        //returnMainMenu()
     }
     
     func refreshAuto(){

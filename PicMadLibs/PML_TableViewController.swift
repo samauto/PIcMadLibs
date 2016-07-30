@@ -37,6 +37,7 @@ class PML_TableViewController: UITableViewController,NSFetchedResultsControllerD
         //check for Internet Connection
         if Reachability.isConnectedToNetwork() == true {
             print("internet connection OK")
+            addButton.enabled = true
         }
         
         // Label to notify that there is no PicMadLibs on the list
@@ -66,12 +67,17 @@ class PML_TableViewController: UITableViewController,NSFetchedResultsControllerD
             popAlert("NO INTERNET CONNECTION", errorString: "You will be only able to view your existing PicMadLibs but not able to make new ones. Make sure your device is connected to the internet")
             internetYESNO = "NO"
         }
-    }
+        
+           }
     
     //END OF FUNC viewDidLoad
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if (internetYESNO == "YES") {
+            addButton.enabled = true
+        }
+
         self.tableView.reloadData()
 
     }//END OF FUNC: viewWillAppear
@@ -110,11 +116,13 @@ class PML_TableViewController: UITableViewController,NSFetchedResultsControllerD
                 // Update an existing PicMadLib
                 madLists[selectedIndexPath.row] = madList
                 tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
+                addButton.enabled = true
             } else {
                 // Add a new PicMadLib
                 let newIndexPath = NSIndexPath(forRow: madLists.count, inSection: 0)
                 madLists.append(madList)
                 tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+                addButton.enabled = true
             }
             
             CoreDataStackManager.sharedInstance().saveContext()
